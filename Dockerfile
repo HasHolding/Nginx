@@ -5,8 +5,9 @@ EXPOSE 80 443
 ENV WEB_CONF "/etc/nginx/conf.d/default.conf"
 VOLUME /shared
 
-RUN apk add nginx
-RUN mkdir -p /run/nginx
+RUN apk add --update --no-cache nginx && \	
+    mkdir -p /run/nginx
+
 COPY entrypoint.sh /bin/entrypoint.sh
 COPY default.conf /etc/nginx/conf.d/default.conf
 ENTRYPOINT ["/bin/entrypoint.sh"]
